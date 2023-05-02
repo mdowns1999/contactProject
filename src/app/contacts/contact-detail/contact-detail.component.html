@@ -1,22 +1,28 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        
-        <h1></h1>
-        
-        <div class="row panel-heading-flex">
-            <div>
-                <img src="" alt="" class="img-responsive contactPic">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                
+                <h2>{{contact?.name}}</h2>
+                
+                
+                    <div class="pull-left">
+                        <img src="{{contact?.imageUrl}}" alt="" class="img-responsive contactPic">
+                    </div>
+                    <div class="pull-right btn-toolbar">
+                        <a class="btn btn-primary">Edit</a>
+                        <a class="btn btn-danger ">Delete</a>
+                    </div>
+                
             </div>
-            <div>
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger ">Delete</button>
+            <div class="panel-body">
+                <div class="list-group-item-heading"> Phone: {{contact?.phone}}</div>
+                <div class="list-group-item-heading">Email: {{contact?.email}}</div>
             </div>
-        </div>
+          </div>
     </div>
-    <div class="panel-body">
-        <p><strong>Phone:</strong></p>
-        <p><strong>Email:</strong></p>
-    </div>
-  </div>
+</div>
+
+
 
 
