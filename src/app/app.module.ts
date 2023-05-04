@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header.component';
@@ -11,7 +12,6 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { DocumentItemComponent } from './documents/document-item/document-item.component';
-import { MessagesComponent } from './messages/messages.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessageItemComponent } from './messages/message-item/message-item.component';
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
@@ -28,13 +28,13 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
     DocumentListComponent,
     DocumentDetailComponent,
     DocumentItemComponent,
-    MessagesComponent,
     MessageListComponent,
     MessageItemComponent,
     MessageEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
