@@ -20,11 +20,12 @@ export class MessageService {
 
    ///Might be right?????????
    getMessage(id: string): Message {
-    for(const message of this.messages){
-        if(message.id == id)
-        return message;
-    }
-    return null;
+    // for(const message of this.messages){
+    //     if(message.id == id)
+    //     return message;
+    // }
+    // return null;
+    return this.messages.find((message)=> message.id === id)
    } 
 
    addMessage(message: Message){
