@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Document } from '../document.model';
 import { DocumentService } from '../document.service';
 
@@ -10,6 +10,7 @@ import { DocumentService } from '../document.service';
 export class DocumentListComponent {
 
   documents : Document[] = [];
+  documentId: string = '';
 
   constructor(private documentService: DocumentService){}
 
@@ -17,8 +18,4 @@ export class DocumentListComponent {
     this.documents = this.documentService.getDocuments();
   }
 
-
-  onSelectedDocument(document: Document){
-    this.documentService.documentSelectedEvent.emit(document);
-  }
 }
