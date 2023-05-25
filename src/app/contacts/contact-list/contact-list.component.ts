@@ -7,24 +7,21 @@ import { ContactService } from '../contact.service';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
-export class ContactListComponent {
+export class ContactListComponent implements OnInit {
 
-  
-
-  // contacts: Contact[] = [
-  //   new Contact("1", "R. Kent Jackson","jacksonk@byui.edu", "208-496-3771", "../../assets/images/jacksonk.jpg", null),
-  //   new Contact("2", "Rex Barzee", "barzeer@byui.edu", "208-496-3771", "../../assets/images/barzeer.jpg", null)
-  // ];
   contacts: Contact[] = [];
 
   constructor(private contactService: ContactService){}
 
   ngOnInit(){
     this.contacts = this.contactService.getContacts();
+    this.contactService.contactChangedEvent.subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+      }
+    )
   }
 
-  onSelected(contact: Contact){
-    this.contactService.contactSelectedEvent.emit(contact);
-  }
+
     
 }

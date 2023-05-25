@@ -1,13 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contact } from '../contact.model';
+import { ContactService } from '../contact.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'cms-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.css']
 })
-export class ContactDetailComponent {
+export class ContactDetailComponent implements OnInit {
 
-  @Input() contact: Contact;
-  //contact = new Contact("1", "Name Here", "Email Here", "555-5555", "https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg", null);
+  contact: Contact;
+  id: string;
+
+  constructor(private contactService: ContactService,
+    private route: ActivatedRoute,
+    private router: Router){}
+
+
+    ngOnInit(){
+      this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = params['id'];
+          this.contact = this.contactService.getContact(this.id);
+        })
+            }
+
+    onDelete(){
+      this.contactService.deleteContact(this.contact);
+      this.router.navigateByUrl('/contacts');
+    }
 }
