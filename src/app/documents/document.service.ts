@@ -32,7 +32,9 @@ export class DocumentService {
    getDocument(id: string): Document {
     for(const document of this.documents){
         if(document.id == id)
-        return document;
+        {
+         return document;
+       }
     }
     return null;
    } 
@@ -71,12 +73,16 @@ addDocument(newDocument: Document) {
 // list and replacing it with a new updated version of the same document.
 updateDocument(originalDocument: Document, newDocument: Document) {
    if (!originalDocument  || !newDocument)
-       return;
+       {
+         return;
+       }
 
 
    let pos = this.documents.indexOf(originalDocument)
    if (pos < 0)
-       return;
+       {
+         return;
+       }
 
    newDocument.id = originalDocument.id;
    this.documents[pos] = newDocument;
