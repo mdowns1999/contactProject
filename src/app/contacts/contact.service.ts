@@ -26,7 +26,7 @@ export class ContactService {
    getContact(id: string): Contact {
     for(const contact of this.contacts){
         if(contact.id == id)
-        return contact;
+        {return contact;}
     }
     return null;
    } 
@@ -80,12 +80,12 @@ export class ContactService {
  // list and replacing it with a new updated version of the same Contact.
  updateContact(originalContact: Contact, newContact: Contact) {
     if (!originalContact  || !newContact)
-        return;
+        {return;}
  
  
     let pos = this.contacts.indexOf(originalContact)
     if (pos < 0)
-        return;
+       { return;}
  
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
