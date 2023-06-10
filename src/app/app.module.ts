@@ -21,6 +21,8 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule } from 'ng2-dnd';
 
+//import {DragDropModule} from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { DndModule } from 'ng2-dnd';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-   DndModule.forRoot()
+    //DragDropModule
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,10 +19,12 @@
           <cms-contact-item
             *ngFor="let contactEl of contacts"
             [contact]="contactEl"
-            
+            dnd-draggable
+            [dragEnabled]="true"
+            [dragData]="contactEl"
+            [dropZones]="['groupContacts']"
           ></cms-contact-item>
         </div>
       </div>
-    </div>
   </div>
 </div>
