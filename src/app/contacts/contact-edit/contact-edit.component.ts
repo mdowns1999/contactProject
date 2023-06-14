@@ -25,34 +25,68 @@ export class ContactEditComponent implements OnInit {
        }
 
 
-  ngOnInit(): void {
-    this.route.params.subscribe (
-      (params: Params) => {
-         this.id = params['id'];
-         if(!this.id)
-         {
-          this.editMode = false
-          return
-         }
+  // ngOnInit(): void {
+  //   this.route.params.subscribe (
+  //     (params: Params) => {
+  //        this.id = params['id'];
+  //        if(!this.id)
+  //        {
+  //         this.editMode = false
+  //         return
+  //        }
   
-         this.originalContact = this.contactService.getContact(this.id);
+  //        this.originalContact = this.contactService.getContact(this.id);
     
-         if(!this.originalContact){
-          return;
-         }
+  //        if(!this.originalContact){
+  //         return;
+  //        }
   
-         this.editMode = true;
-         this.contact = JSON.parse(JSON.stringify(this.originalContact));
+  //        this.editMode = true;
+  //        this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
 
-         if(this.originalContact.group && this.originalContact.group.length > 0)
-         {
-          console.log("Made it")
-          this.groupContacts = JSON.parse(JSON.stringify(this.contact.group));
-         }
+  //        if(this.originalContact.group && this.originalContact.group.length > 0)
+  //        {
+  //         console.log("Made it")
+  //         this.groupContacts = JSON.parse(JSON.stringify(this.contact.group));
+  //        }
 
 
-    }) 
+  //   }) 
+  // }
+
+  ngOnInit(){
+    this.route.params.subscribe((params: Params) => {
+        this.id = params['id'];
+ 
+
+        if(!this.id) {
+          this.editMode = false;
+          return;
+        }
+ 
+
+       this.originalContact = this.contactService.getContact(this.id)
+ 
+
+        if(!this.originalContact) {
+          return
+        }
+        this.editMode = true;
+        this.contact = JSON.parse(JSON.stringify(this.originalContact));
+ 
+
+        if(
+          this.originalContact.group &&
+          this.originalContact.group.length > 0
+        ){
+          this.groupContacts = JSON.parse(
+            JSON.stringify(this.originalContact.group)
+          );
+        }
+ 
+
+      });
   }
 
 
@@ -67,19 +101,21 @@ export class ContactEditComponent implements OnInit {
       value.email,
       value.phone,
       value.imageUrl,
-      value.group
+      this.groupContacts
       )
+
+      //newContact.group = this.groupContacts;
    
-    if (this.editMode == true){
+    if (this.editMode){
       console.log("EDIT CONTACT!")
       this.contactService.updateContact(this.originalContact, newContact);
-      this.editMode = false;
+      //this.editMode = false;
     }
      
     else {
       console.log("ADD CONTACT!")
       this.contactService.addContact(newContact);
-      this.editMode = false;
+      //this.editMode = false;
     }
   
    //this.editMode = false;

@@ -89,6 +89,8 @@ export class ContactService {
  
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
+    
+
     let contactsListClone = this.contacts.slice();
     this.contactListChangedEvent.next(contactsListClone);
  }
