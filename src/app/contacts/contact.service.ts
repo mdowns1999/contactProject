@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {Contact} from './contact.model';
 import {MOCKCONTACTS} from './MOCKCONTACTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,79 @@ export class ContactService {
 
    contacts: Contact [] =[];
    maxContactId: number;
-   constructor() {
-      this.contacts = MOCKCONTACTS;
+   constructor(private http: HttpClient) {
+      //this.contacts = MOCKCONTACTS;
       this.maxContactId = this.getMaxId();
    }
 
-   getContacts(): Contact[]{
-    return this.contacts.slice();
-   }
+   // getContacts(): Contact[]{
+   //  return this.contacts.slice();
+   // }
+
+   //Get List of contactss
+  getContacts(): Contact[] {
+   console.log('MADE IT');
+   this.http
+     .get<Contact[]>(
+       'https://cms-contacts-project-default-rtdb.firebaseio.com/contacts.json'
+     )
+     .subscribe(
+       // success method
+       (contacts: Contact[]) => {
+         this.contacts = contacts.sort();
+         this.maxContactId = this.getMaxId();
+         this.contactListChangedEvent.next(this.contacts.slice());
+       },
+       (error: any) => {
+         console.log(error.message);
+       }
+     );
+
+   return this.contacts.slice();
+ }
+
+ storeContacts(){
+   let contactList = JSON.stringify(this.contacts);
+   //console.log(contactList)
+   this.http.put('https://cms-contacts-project-default-rtdb.firebaseio.com/contacts.json', contactList,
+   {
+      headers: new HttpHeaders({
+         "Content-Type": "application/json"
+      })
+   }).subscribe(
+      () =>{
+         this.contactListChangedEvent.next(this.contacts.slice());
+      }
+   )
+  }
+
+
+
+//  storeDocuments(){
+//   let documentList = JSON.stringify(this.documents);
+//   this.http.put('https://cms-contacts-project-default-rtdb.firebaseio.com/documents.json', documentList,
+//   {
+//      headers: new HttpHeaders({
+//         "Content-Type": "application/json"
+//      })
+//   }).subscribe(
+//      () =>{
+//         this.documentListChangedEvent.next(this.documents.slice());
+//      }
+//   )
+//  }
+
 
    ///Might be right?????????
    getContact(id: string): Contact {
-    for(const contact of this.contacts){
-        if(contact.id == id)
-        {return contact;}
-    }
-    return null;
+   //  for(const contact of this.contacts){
+   //      if(contact.id == id)
+   //      {return contact;}
+   //  }
+   //  return null;
+  
+
+    return this.contacts.find((contact)=> contact.id === id)
    } 
 
   //  deleteContact(contact: Contact) {
@@ -73,7 +131,8 @@ export class ContactService {
     newContact.id = this.maxContactId.toString();
     this.contacts.push(newContact);
     let contactsListClone = this.contacts.slice()
-    this.contactListChangedEvent.next(contactsListClone);
+    //this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
  }
  
  // The udpateContact() function is responsible for locating an existing Contact in the Contacts 
@@ -92,7 +151,8 @@ export class ContactService {
     
 
     let contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone);
+    //this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
  }
  
  // The deleteContact() function is responsible for locating and 
@@ -107,7 +167,8 @@ export class ContactService {
      }
     this.contacts.splice(pos, 1)
     let contactsListClone = this.contacts.slice()
-    this.contactListChangedEvent.next(contactsListClone);
+    //this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
  }
 
 }

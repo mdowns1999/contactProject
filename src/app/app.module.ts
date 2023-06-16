@@ -20,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule } from 'ng2-dnd';
-
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
+import {HttpClientModule} from '@angular/common/http'
 //import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -40,13 +41,14 @@ import { DndModule } from 'ng2-dnd';
     MessageEditComponent,
     DropdownDirectiveDirective,
     DocumentEditComponent,
-    ContactEditComponent
+    ContactEditComponent,
+    ContactsFilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    //DragDropModule
+    HttpClientModule,
     DndModule.forRoot()
   ],
   providers: [],

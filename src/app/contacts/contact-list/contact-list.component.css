@@ -2,6 +2,14 @@
     margin-top:15px;
 }
 
+.pad-left-right{
+  margin-right:10px;
+}
+
+.general-padding{
+  padding:5px;
+}
+
 /* @media screen and (max-width: 1000px) {
     .margin-top {
       margin-right: 15px;

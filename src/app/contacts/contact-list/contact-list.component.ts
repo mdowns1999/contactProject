@@ -13,6 +13,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: Contact[] = [];
   subscription: Subscription;
+  term: string;
 
   constructor(private contactService: ContactService){}
 
@@ -35,5 +36,8 @@ export class ContactListComponent implements OnInit {
   }
 
 
-    
+    search(value:string){
+      this.term = value;
+      console.log(this.term);
+    }
 }
