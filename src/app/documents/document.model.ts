@@ -1,5 +1,5 @@
 export class Document{
-
+//        public _id : string,
     constructor(
         public id: string,
         public name: string,

@@ -59,13 +59,11 @@ onSubmit(form: NgForm) {
     value.children)
  
   if (this.editMode == true){
-    console.log("EDIT DOCUMENT!")
     this.documentService.updateDocument(this.originalDocument, newDocument);
     this.editMode = false;
   }
    
   else {
-    console.log("ADD DOCUMENT!")
     this.documentService.addDocument(newDocument);
   }
 

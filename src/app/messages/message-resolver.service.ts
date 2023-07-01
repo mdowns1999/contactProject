@@ -17,8 +17,9 @@ export class MessageResolverService implements Resolve<Message[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('RESOLVE')
-    this.contacts.getContacts()
+    //console.log(this.contacts.getContacts())
+    console.log(this.contacts.getContacts());
+
     return this.messageService.getMessages();
   }
 }

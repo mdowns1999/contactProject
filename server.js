@@ -6,6 +6,15 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongoose = require('mongoose');
+
+// establish a connection to the mongo database mongodb://localhost:27017
+mongoose
+  .connect("mongodb://127.0.0.1:27017/cms", { useNewUrlParser: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("Connection failed: " + err));
+  
+
 // import the routing file to handle the default (index) route
 //var index = require('./server/routes/app');
 var index = require('./server/routes/app');
@@ -49,7 +58,7 @@ app.use(express.static(path.join(__dirname, 'dist/contact-app')));
 app.use('/', index);
 app.use('/messages', messageRoutes);
 app.use('/contacts', contactRoutes);
-app.use('/messages', documentRoutes);
+app.use('/documents', documentRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
